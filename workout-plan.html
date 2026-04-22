@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5-Month Transformation Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --card: #161616;
+    --border: #222;
+    --accent: #e8ff00;
+    --accent2: #ff4d00;
+    --accent3: #00d4ff;
+    --text: #f0f0f0;
+    --muted: #666;
+    --light-muted: #999;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 60px 40px 50px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232,255,0,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 10vw, 110px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
+
+  h1 span {
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 15px;
+    color: var(--light-muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+
+  .stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* BODY PROFILE */
+  .profile-bar {
+    display: flex; flex-wrap: wrap;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .profile-item {
+    flex: 1;
+    min-width: 160px;
+    padding: 20px 28px;
+    border-right: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .profile-item:last-child { border-right: none; }
+
+  .p-icon {
+    font-size: 22px;
+    opacity: 0.8;
+  }
+
+  .p-text { display: flex; flex-direction: column; }
+  .p-label { font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; font-family: 'Space Mono', monospace; }
+  .p-val { font-size: 15px; font-weight: 500; color: var(--text); margin-top: 2px; }
+
+  /* PHASE SYSTEM */
+  .phases {
+    padding: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2px;
+  }
+
+  .phase-card {
+    background: var(--card);
+    padding: 24px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .phase-card:hover { border-color: var(--accent); }
+
+  .phase-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    line-height: 1;
+    color: rgba(232,255,0,0.06);
+    position: absolute;
+    top: 8px; right: 16px;
+  }
+
+  .phase-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .phase-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .phase-months {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .phase-desc {
+    font-size: 13px;
+    color: var(--light-muted);
+    line-height: 1.6;
+  }
+
+  /* WEEKLY SPLIT */
+  .split {
+    padding: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2px;
+  }
+
+  .day-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+    position: relative;
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .day-card:hover {
+    border-color: #333;
+    background: #1a1a1a;
+  }
+
+  .day-card.rest {
+    opacity: 0.5;
+  }
+
+  .day-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .day-muscles {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
+
+  .day-focus {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--light-muted);
+    line-height: 1.5;
+  }
+
+  .muscle-tag {
+    display: inline-block;
+    background: rgba(232,255,0,0.1);
+    color: var(--accent);
+    font-size: 10px;
+    font-family: 'Space Mono', monospace;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+
+  .muscle-tag.orange { background: rgba(255,77,0,0.12); color: var(--accent2); }
+  .muscle-tag.blue { background: rgba(0,212,255,0.1); color: var(--accent3); }
+
+  /* WORKOUT TABLE */
+  .workouts {
+    padding: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-section {
+    margin-bottom: 48px;
+  }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+    border: 1px solid;
+  }
+
+  .day-badge.y { border-color: var(--accent); color: var(--accent); }
+  .day-badge.o { border-color: var(--accent2); color: var(--accent2); }
+  .day-badge.b { border-color: var(--accent3); color: var(--accent3); }
+
+  .day-header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 1px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead tr {
+    background: var(--surface);
+  }
+
+  th {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #1a1a1a;
+    vertical-align: middle;
+    color: var(--light-muted);
+  }
+
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  td:first-child {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .sets-reps {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  .note-badge {
+    font-size: 10px;
+    font-family: 'Space Mono', monospace;
+    background: rgba(255,77,0,0.1);
+    color: var(--accent2);
+    padding: 2px 8px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  /* SPECIAL SECTIONS */
+  .tips {
+    padding: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2px;
+  }
+
+  .tip-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .tip-icon { font-size: 28px; margin-bottom: 12px; }
+  .tip-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .tip-body {
+    font-size: 13px;
+    color: var(--light-muted);
+    line-height: 1.7;
+  }
+
+  .tip-body strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* IMBALANCE NOTE */
+  .alert-box {
+    margin: 0 40px 0;
+    background: rgba(255,77,0,0.06);
+    border: 1px solid rgba(255,77,0,0.2);
+    border-left: 3px solid var(--accent2);
+    padding: 20px 24px;
+    display: flex; gap: 16px; align-items: flex-start;
+    margin-bottom: 0;
+  }
+
+  .alert-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .alert-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: var(--accent2);
+    margin-bottom: 6px;
+  }
+  .alert-text {
+    font-size: 13px;
+    color: var(--light-muted);
+    line-height: 1.7;
+  }
+
+  /* PROGRESSION */
+  .prog {
+    padding: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .prog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+  }
+
+  .prog-item {
+    padding: 20px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+
+  .prog-month {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .prog-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .prog-list {
+    list-style: none;
+    font-size: 12px;
+    color: var(--light-muted);
+    line-height: 2;
+  }
+
+  .prog-list li::before {
+    content: '→ ';
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+  }
+
+  footer {
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-note {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+
+  .footer-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    .hero, .phases, .split, .workouts, .tips, .prog, footer { padding: 24px 20px; }
+    .alert-box { margin: 0 20px; }
+    h1 { font-size: 60px; }
+    .hero-stats { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Personalized Training Protocol</div>
+  <h1>BUILD.<span>TRANSFORM.</span></h1>
+  <p class="hero-sub">A structured 5-month muscle-building program designed around your lean frame, belly fat target, and arm imbalance correction — 5 days a week, two muscle groups per day, full gym access.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-val">5</span><span class="stat-label">Days / Week</span></div>
+    <div class="stat"><span class="stat-val">5</span><span class="stat-label">Months</span></div>
+    <div class="stat"><span class="stat-val">2</span><span class="stat-label">Muscles / Day</span></div>
+    <div class="stat"><span class="stat-val">57kg</span><span class="stat-label">Starting Weight</span></div>
+  </div>
+</div>
+
+<!-- BODY PROFILE -->
+<div class="profile-bar">
+  <div class="profile-item"><span class="p-icon">📏</span><div class="p-text"><span class="p-label">Height</span><span class="p-val">178 cm</span></div></div>
+  <div class="profile-item"><span class="p-icon">⚖️</span><div class="p-text"><span class="p-label">Weight</span><span class="p-val">~57 kg</span></div></div>
+  <div class="profile-item"><span class="p-icon">🏗️</span><div class="p-text"><span class="p-label">Body Type</span><span class="p-val">Lean + Belly Fat</span></div></div>
+  <div class="profile-item"><span class="p-icon">💪</span><div class="p-text"><span class="p-label">Imbalance</span><span class="p-val">Right Arm Dominant</span></div></div>
+  <div class="profile-item"><span class="p-icon">🎯</span><div class="p-text"><span class="p-label">Goal</span><span class="p-val">Muscle Gain + Bulk</span></div></div>
+</div>
+
+<!-- PHASES -->
+<div class="phases">
+  <div class="section-title">Training Phases</div>
+  <div class="phase-grid">
+    <div class="phase-card">
+      <div class="phase-num">1</div>
+      <div class="phase-label">Phase 01</div>
+      <div class="phase-title">Foundation & Form</div>
+      <div class="phase-months">Month 1 — 2</div>
+      <div class="phase-desc">Build neuromuscular connection, master compound lifts, establish a caloric surplus, and start correcting the left-arm deficit using unilateral exercises.</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">2</div>
+      <div class="phase-label">Phase 02</div>
+      <div class="phase-title">Hypertrophy Drive</div>
+      <div class="phase-months">Month 3 — 4</div>
+      <div class="phase-desc">Increase volume and intensity. Introduce progressive overload weekly. Focus on time-under-tension for maximum muscle fiber recruitment. Belly fat begins to redistribute as muscle mass rises.</div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">3</div>
+      <div class="phase-label">Phase 03</div>
+      <div class="phase-title">Peak & Strength</div>
+      <div class="phase-months">Month 5</div>
+      <div class="phase-desc">Shift toward heavier loads (75–85% 1RM), lower reps, and strength compounds. Lock in symmetry gains, consolidate muscle, and set the base for continued growth beyond month 5.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ARM IMBALANCE ALERT -->
+<div class="alert-box" style="margin: 0 40px; margin-bottom: 0; padding: 20px 24px;">
+  <div class="alert-icon">⚠️</div>
+  <div>
+    <div class="alert-title">Arm Imbalance Correction Protocol</div>
+    <div class="alert-text">
+      For <strong>all unilateral exercises</strong> (dumbbell curls, single-arm rows, dumbbell press, etc.) — <strong>always start with your weaker left arm</strong> and match that exact weight and reps on the right. Never let your right arm compensate for the left. Additionally, do <strong>1 extra set for left arm only</strong> on bicep and tricep days until the gap closes (typically 6–8 weeks).
+    </div>
+  </div>
+</div>
+
+<!-- WEEKLY SPLIT -->
+<div class="split">
+  <div class="section-title">5-Day Weekly Split</div>
+  <div class="day-grid">
+    <div class="day-card">
+      <div class="day-name">Monday</div>
+      <div class="day-muscles">Chest<br>+ Triceps</div>
+      <div class="day-focus">Push day — compounds first, isolations after</div>
+      <span class="muscle-tag">PUSH DAY</span>
+    </div>
+    <div class="day-card">
+      <div class="day-name">Tuesday</div>
+      <div class="day-muscles">Back<br>+ Biceps</div>
+      <div class="day-focus">Pull day — width + thickness + arm balance</div>
+      <span class="muscle-tag orange">PULL DAY</span>
+    </div>
+    <div class="day-card">
+      <div class="day-name">Wednesday</div>
+      <div class="day-muscles">Shoulders<br>+ Abs</div>
+      <div class="day-focus">Core burn — great for targeting belly fat</div>
+      <span class="muscle-tag blue">CORE DAY</span>
+    </div>
+    <div class="day-card">
+      <div class="day-name">Thursday</div>
+      <div class="day-muscles">Legs<br>+ Glutes</div>
+      <div class="day-focus">Largest muscle group — biggest growth hormone spike</div>
+      <span class="muscle-tag orange">POWER DAY</span>
+    </div>
+    <div class="day-card">
+      <div class="day-name">Friday</div>
+      <div class="day-muscles">Arms<br>+ Abs</div>
+      <div class="day-focus">Dedicated arm day + imbalance correction focus</div>
+      <span class="muscle-tag">ARMS DAY</span>
+    </div>
+    <div class="day-card rest">
+      <div class="day-name">Saturday</div>
+      <div class="day-muscles">Rest / Walk</div>
+      <div class="day-focus">Light 20–30 min walk — active recovery</div>
+    </div>
+    <div class="day-card rest">
+      <div class="day-name">Sunday</div>
+      <div class="day-muscles">Full Rest</div>
+      <div class="day-focus">Muscle repair day — eat well and sleep</div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAILED WORKOUTS -->
+<div class="workouts">
+  <div class="section-title">Full Workout Breakdown</div>
+
+  <!-- DAY 1 -->
+  <div class="day-section">
+    <div class="day-header">
+      <span class="day-badge y">MON</span>
+      <span class="day-header-title">Chest + Triceps</span>
+    </div>
+    <table>
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Rest</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Flat Barbell Bench Press</td><td class="sets-reps">4 × 8–10</td><td>90s</td><td>Core compound — increase weight weekly</td></tr>
+        <tr><td>Incline Dumbbell Press</td><td class="sets-reps">3 × 10–12</td><td>75s</td><td>Upper chest activation</td></tr>
+        <tr><td>Cable Chest Flyes (mid)</td><td class="sets-reps">3 × 12–15</td><td>60s</td><td>Full stretch at bottom</td></tr>
+        <tr><td>Chest Dips (weighted if possible)</td><td class="sets-reps">3 × 10–12</td><td>75s</td><td>Lean forward slightly</td></tr>
+        <tr><td>Close-Grip Bench Press</td><td class="sets-reps">3 × 10</td><td>75s</td><td>Tricep compound</td></tr>
+        <tr><td>Overhead Tricep Extension (cable)</td><td class="sets-reps">3 × 12–15</td><td>60s</td><td>Long head focus</td></tr>
+        <tr><td>Tricep Pushdowns (rope)</td><td class="sets-reps">3 × 15</td><td>45s</td><td>Squeeze hard at bottom</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-section">
+    <div class="day-header">
+      <span class="day-badge o">TUE</span>
+      <span class="day-header-title">Back + Biceps</span>
+    </div>
+    <table>
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Rest</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Deadlift (conventional)</td><td class="sets-reps">4 × 6–8</td><td>2 min</td><td>King of mass — form first</td></tr>
+        <tr><td>Weighted Pull-Ups / Lat Pulldown</td><td class="sets-reps">4 × 8–10</td><td>90s</td><td>Full stretch at top</td></tr>
+        <tr><td>Seated Cable Row</td><td class="sets-reps">3 × 10–12</td><td>75s</td><td>Chest to pad, elbows back</td></tr>
+        <tr><td>Single-Arm Dumbbell Row</td><td class="sets-reps">3 × 12</td><td>60s</td><td><span class="note-badge">LEFT ARM FIRST</span></td></tr>
+        <tr><td>Face Pulls (cable)</td><td class="sets-reps">3 × 15</td><td>45s</td><td>Rear delt + posture</td></tr>
+        <tr><td>Barbell Curl</td><td class="sets-reps">3 × 10</td><td>60s</td><td>No swinging</td></tr>
+        <tr><td>Alternating Dumbbell Curl</td><td class="sets-reps">3 × 12 each</td><td>60s</td><td><span class="note-badge">LEFT ARM FIRST + 1 EXTRA SET LEFT</span></td></tr>
+        <tr><td>Hammer Curl</td><td class="sets-reps">2 × 15</td><td>45s</td><td>Brachialis + forearm</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-section">
+    <div class="day-header">
+      <span class="day-badge b">WED</span>
+      <span class="day-header-title">Shoulders + Abs</span>
+    </div>
+    <table>
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Rest</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Seated Dumbbell Shoulder Press</td><td class="sets-reps">4 × 8–10</td><td>90s</td><td><span class="note-badge">LEFT ARM FIRST</span></td></tr>
+        <tr><td>Barbell Overhead Press (standing)</td><td class="sets-reps">3 × 8</td><td>90s</td><td>Core tight, no arch</td></tr>
+        <tr><td>Lateral Raises (dumbbell)</td><td class="sets-reps">4 × 15</td><td>45s</td><td>Slow eccentric — key for width</td></tr>
+        <tr><td>Cable Lateral Raise</td><td class="sets-reps">3 × 15 each</td><td>45s</td><td>Unilateral — match weights</td></tr>
+        <tr><td>Reverse Pec Deck / Rear Delt Fly</td><td class="sets-reps">3 × 15</td><td>45s</td><td>Rear delt balance</td></tr>
+        <tr><td>Hanging Leg Raises</td><td class="sets-reps">4 × 15</td><td>60s</td><td>Lower abs — belly fat target</td></tr>
+        <tr><td>Cable Crunches</td><td class="sets-reps">3 × 20</td><td>45s</td><td>Weighted ab work</td></tr>
+        <tr><td>Plank</td><td class="sets-reps">3 × 45–60s</td><td>45s</td><td>Core stability</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-section">
+    <div class="day-header">
+      <span class="day-badge o">THU</span>
+      <span class="day-header-title">Legs + Glutes</span>
+    </div>
+    <table>
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Rest</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Barbell Back Squat</td><td class="sets-reps">4 × 8–10</td><td>2 min</td><td>Go below parallel, big GH spike</td></tr>
+        <tr><td>Romanian Deadlift</td><td class="sets-reps">3 × 10–12</td><td>90s</td><td>Hamstring + glute stretch</td></tr>
+        <tr><td>Leg Press</td><td class="sets-reps">3 × 12</td><td>75s</td><td>Foot placement = quad vs glute</td></tr>
+        <tr><td>Bulgarian Split Squat</td><td class="sets-reps">3 × 10 each</td><td>75s</td><td>Unilateral strength balance</td></tr>
+        <tr><td>Leg Curl (machine)</td><td class="sets-reps">3 × 12–15</td><td>60s</td><td>Slow on the way down</td></tr>
+        <tr><td>Leg Extension (machine)</td><td class="sets-reps">3 × 15</td><td>60s</td><td>VMO focus</td></tr>
+        <tr><td>Standing Calf Raises</td><td class="sets-reps">4 × 20</td><td>45s</td><td>Full range — pause at top</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-section">
+    <div class="day-header">
+      <span class="day-badge y">FRI</span>
+      <span class="day-header-title">Arms (Biceps + Triceps) + Abs</span>
+    </div>
+    <table>
+      <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Rest</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>EZ Bar Curl</td><td class="sets-reps">4 × 10</td><td>60s</td><td>Elbow-friendly, great peak</td></tr>
+        <tr><td>Incline Dumbbell Curl</td><td class="sets-reps">3 × 12</td><td>60s</td><td><span class="note-badge">LEFT ARM FIRST + 1 EXTRA SET LEFT</span></td></tr>
+        <tr><td>Preacher Curl (machine/EZ)</td><td class="sets-reps">3 × 12</td><td>60s</td><td>Bicep peak isolation</td></tr>
+        <tr><td>Skull Crushers (EZ bar)</td><td class="sets-reps">4 × 10</td><td>60s</td><td>Long head tricep mass</td></tr>
+        <tr><td>Overhead Dumbbell Tricep Ext.</td><td class="sets-reps">3 × 12 each</td><td>60s</td><td><span class="note-badge">LEFT ARM FIRST + 1 EXTRA SET LEFT</span></td></tr>
+        <tr><td>Tricep Dips (bench/bar)</td><td class="sets-reps">3 × 15</td><td>60s</td><td>Bodyweight finisher</td></tr>
+        <tr><td>Cable Crunch</td><td class="sets-reps">3 × 20</td><td>45s</td><td>Weighted ab work</td></tr>
+        <tr><td>Bicycle Crunches</td><td class="sets-reps">3 × 20 each</td><td>45s</td><td>Obliques + belly fat</td></tr>
+        <tr><td>Reverse Crunch</td><td class="sets-reps">3 × 20</td><td>45s</td><td>Lower belly target</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PROGRESSION ROADMAP -->
+<div class="prog">
+  <div class="section-title">Month-by-Month Progression</div>
+  <div class="prog-grid">
+    <div class="prog-item">
+      <div class="prog-month">Month 01</div>
+      <div class="prog-title">Learn the Lifts</div>
+      <ul class="prog-list">
+        <li>3–4 sets per exercise</li>
+        <li>Light-moderate weight</li>
+        <li>12–15 rep range</li>
+        <li>Start imbalance protocol</li>
+        <li>Caloric surplus +300 kcal</li>
+      </ul>
+    </div>
+    <div class="prog-item">
+      <div class="prog-month">Month 02</div>
+      <div class="prog-title">Build the Base</div>
+      <ul class="prog-list">
+        <li>Add weight every week</li>
+        <li>10–12 rep range</li>
+        <li>Track all weights used</li>
+        <li>Aim for +1–2 kg body weight</li>
+        <li>Sleep 7–8 hrs mandatory</li>
+      </ul>
+    </div>
+    <div class="prog-item">
+      <div class="prog-month">Month 03</div>
+      <div class="prog-title">Volume Surge</div>
+      <ul class="prog-list">
+        <li>Add drop sets on isolations</li>
+        <li>8–12 rep range</li>
+        <li>Slow eccentric (3 sec down)</li>
+        <li>Caloric surplus +400 kcal</li>
+        <li>Protein 2g per kg bodyweight</li>
+      </ul>
+    </div>
+    <div class="prog-item">
+      <div class="prog-month">Month 04</div>
+      <div class="prog-title">Density & Shape</div>
+      <ul class="prog-list">
+        <li>Superset isolation movements</li>
+        <li>8–10 rep range</li>
+        <li>Reduce rest on isolations</li>
+        <li>Check arm symmetry progress</li>
+        <li>Add cardio 2×/week (optional)</li>
+      </ul>
+    </div>
+    <div class="prog-item">
+      <div class="prog-month">Month 05</div>
+      <div class="prog-title">Strength Peak</div>
+      <ul class="prog-list">
+        <li>Heavy compounds 5–8 reps</li>
+        <li>75–85% of 1RM</li>
+        <li>Deload in week 4</li>
+        <li>Assess transformation fully</li>
+        <li>Plan next 3-month cycle</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- TIPS -->
+<div class="tips">
+  <div class="section-title">Key Trainer Notes</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">🍗</div>
+      <div class="tip-title">Nutrition Strategy</div>
+      <div class="tip-body">
+        Eat in a <strong>caloric surplus of 300–400 kcal/day</strong>. Target <strong>2g of protein per kg</strong> body weight (~114g/day). Prioritize chicken, eggs, paneer, lentils, and Greek yogurt. Have a protein-rich meal within 45 minutes post-workout. Don't skip carbs — rice and oats fuel your lifts.
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">📈</div>
+      <div class="tip-title">Progressive Overload</div>
+      <div class="tip-body">
+        Add <strong>2.5 kg every 1–2 weeks</strong> on compound lifts when you can complete all sets with good form. For dumbbells, increase by the smallest increment available. This is the single most important factor in muscle growth — <strong>log every session</strong>.
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">😴</div>
+      <div class="tip-title">Recovery is Training</div>
+      <div class="tip-body">
+        Muscles grow during rest, not during lifting. Aim for <strong>7–8 hours of sleep</strong> every night — this is non-negotiable for your body weight goal. Keep Saturday as an active recovery walk (20–30 min). Overtraining will stall your gains faster than anything else.
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🎯</div>
+      <div class="tip-title">Belly Fat Approach</div>
+      <div class="tip-body">
+        You <strong>cannot spot-reduce fat</strong>, but as you build muscle and eat in a clean surplus, your body composition will shift noticeably. Heavy compound lifts (squats, deadlifts, bench) trigger growth hormone that helps metabolize belly fat. Ab work on Wed + Fri will strengthen and tighten the core.
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">🔥</div>
+      <div class="tip-title">Warm-Up Protocol</div>
+      <div class="tip-body">
+        <strong>Never skip warm-up.</strong> Do 5–7 minutes of light cardio, then 2 warm-up sets (50–60% of working weight) for the first exercise of each session. For shoulders and legs, add dynamic stretching. Injury prevention is critical for consistent progress over 5 months.
+      </div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon">💧</div>
+      <div class="tip-title">Hydration & Timing</div>
+      <div class="tip-body">
+        Drink <strong>3–4 liters of water daily</strong>. Have a pre-workout meal <strong>1–1.5 hrs before training</strong> — rice + chicken or banana + peanut butter. Post-workout: fast protein within 45 min (whey shake or eggs). Creatine monohydrate 5g/day is the one supplement worth adding for your goal.
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-note">— Review and adjust weights every 4 weeks. Consult a physician before starting any new training program.</span>
+  <span class="footer-brand">TRANSFORM PROTOCOL</span>
+</footer>
+
+</body>
+</html>
